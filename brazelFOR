@@ -1,0 +1,49 @@
+MODULE Module1
+	CONST robtarget phome:=[[319.54,25.58,701.80],[0.77339,-0.0836777,0.627698,-0.0293548],[0,-1,-1,1],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]];
+	CONST robtarget p10:=[[687.81,33.76,641.10],[0.740831,-0.0897784,0.66529,-0.0223161],[0,-1,0,1],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]];
+    !***********************************************************
+
+    !***********************************************************
+    
+    PROC bandeira()
+        MoveJ phome, vmax, fine, tool0;
+        MoveJ p10, vmax, fine, tool0;
+        Movel offs(p10, 0, 200, 0), vmax, fine, tool0;
+        Movel offs(p10, 0, 200, -100), vmax, fine, tool0;
+        Movel offs(p10, 0, 0, -100), vmax, fine, tool0;
+        Movel p10, vmax, fine, tool0;
+        Movej offs(p10, -200, 100, -10), vmax, fine, tool0; !prox
+        Movej offs(p10, 0, 100, -10), vmax, fine, tool0;
+        Movel offs(p10, 0, 190, -50), vmax, fine, tool0;
+        Movel offs(p10, 0, 100, -90), vmax, fine, tool0;
+        Movel offs(p10, 0, 10, -50), vmax, fine, tool0;
+        Movel offs(p10, 0, 100, -10), vmax, fine, tool0;
+        Movej offs(p10, -200, 100, -10), vmax, fine, tool0; !prox
+        Movej offs(p10, 0, 100, -20), vmax, fine, tool0;
+        Movec offs(p10, 0, 130, -50), offs(p10, 0, 100, -80), vmax, fine, tool0;
+        Movec offs(p10, 0, 70, -50), offs(p10, 0, 100, -20), vmax, fine, tool0;
+        MoveJ phome, vmax, fine, tool0;
+    ENDPROC
+    
+    PROC main()
+        TPErase;
+        TPReadNum reg2, "Quer quantas bandeiras?";
+        FOR reg3 FROM 1 TO reg2 DO
+            bandeira;
+        ENDFOR
+        TPReadFK reg1, "Gostou do Brasel?", "Sim, I liked", stEmpty, "Não, I don't", stEmpty, stEmpty;
+        IF reg1 = 1 THEN
+            TPWrite "Byebye";
+        ENDIF
+        WHILE reg1 = 3 DO
+            TPReadNum reg2, "Quer quantas bandeiras?";
+            FOR reg3 FROM 1 TO reg2 DO
+                bandeira;
+            ENDFOR
+            TPReadFK reg1, "Gostou do Brasel?", "Sim, I liked", stEmpty, "Não, I don't", stEmpty, stEmpty;
+            IF reg1 = 1 THEN
+            TPWrite "Byebye";
+            ENDIF
+        ENDWHILE
+    ENDPROC
+ENDMODULE
