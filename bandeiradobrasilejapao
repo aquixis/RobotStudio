@@ -1,0 +1,82 @@
+MODULE Module1
+	CONST robtarget phome:=[[319.54,25.58,701.80],[0.77339,-0.0836777,0.627698,-0.0293548],[0,-1,-1,1],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]];
+	CONST robtarget p10:=[[687.81,33.76,641.10],[0.740831,-0.0897784,0.66529,-0.0223161],[0,-1,0,1],[9E+9,9E+9,9E+9,9E+9,9E+9,9E+9]];
+    !***********************************************************
+
+    !***********************************************************
+    
+    PROC bandeira()
+        reg3 := 2;
+        WHILE reg3 = 2 DO  
+            TPReadNum reg1, "Deseja realizar a bandeira do brasil quantas vezes?";
+            FOR reg2 FROM 1 TO reg1 DO
+                MoveJ phome, vmax, fine, tool0;
+                MoveJ p10, vmax, fine, tool0;  
+                Movel offs(p10, 0, 200, 0), vmax, fine, tool0;
+                Movel offs(p10, 0, 200, -100), vmax, fine, tool0;
+                Movel offs(p10, 0, 0, -100), vmax, fine, tool0;
+                Movel p10, vmax, fine, tool0;
+                Movej offs(p10, -200, 100, -10), vmax, fine, tool0; !prox
+                Movej offs(p10, 0, 100, -10), vmax, fine, tool0;
+                Movel offs(p10, 0, 190, -50), vmax, fine, tool0;
+                Movel offs(p10, 0, 100, -90), vmax, fine, tool0;
+                Movel offs(p10, 0, 10, -50), vmax, fine, tool0;
+                Movel offs(p10, 0, 100, -10), vmax, fine, tool0;
+                Movej offs(p10, -200, 100, -10), vmax, fine, tool0; !prox
+                Movej offs(p10, 0, 100, -20), vmax, fine, tool0;
+                Movec offs(p10, 0, 130, -50), offs(p10, 0, 100, -80), vmax, fine, tool0;
+                Movec offs(p10, 0, 70, -50), offs(p10, 0, 100, -20), vmax, fine, tool0;
+                MoveJ phome, vmax, fine, tool0;
+            ENDFOR
+            TPErase;
+            TPReadFK reg3, "Desenho foi feito corretamente?", "SIM", "NÃO", stEmpty,stEmpty,stEmpty;
+            TPErase;
+        ENDWHILE
+        TPErase;
+        TPWrite("Rotina realizada com sucesso");
+        PulseDO \Plength:=7,do0;
+        WaitTime 7;
+        TPErase;
+    ENDPROC
+    
+    PROC bandeiraJapao()
+        reg3 := 2;
+        WHILE reg3 = 2 DO  
+            TPReadNum reg1, "Deseja realizar a bandeira do japao quantas vezes?";
+            FOR reg2 FROM 1 TO reg1 DO
+                MoveJ phome, vmax, fine, tool0;
+                MoveJ p10, vmax, fine, tool0;
+                Movel offs(p10, 0, 200, 0), vmax, fine, tool0;
+                Movel offs(p10, 0, 200, -100), vmax, fine, tool0;
+                Movel offs(p10, 0, 0, -100), vmax, fine, tool0;
+                Movel p10, vmax, fine, tool0;
+                Movej offs(p10, -200, 100, -10), vmax, fine, tool0; !prox
+                Movej offs(p10, 0, 100, -20), vmax, fine, tool0;
+                Movec offs(p10, 0, 130, -50), offs(p10, 0, 100, -80), vmax, fine, tool0;
+                Movec offs(p10, 0, 70, -50), offs(p10, 0, 100, -20), vmax, fine, tool0;
+                MoveJ phome, vmax, fine, tool0;
+            ENDFOR
+            TPErase;
+            TPReadFK reg3, "Desenho foi feito corretamente?", "SIM", "NÃO", stEmpty,stEmpty,stEmpty;
+            TPErase;
+        ENDWHILE
+        TPErase;
+        TPWrite("Rotina realizada com sucesso");
+        PulseDO \Plength:=7,do0;
+        WaitTime 7;
+        TPErase;
+    ENDPROC
+    
+    PROC main()
+        TPWrite("Olá operador, este programa foi criado por luis e alekei");
+        WaitTime(7);
+        TPErase;
+        IF di1 = 1 then
+            bandeira;    
+        ENDIF
+        IF di2 = 1 then
+            bandeiraJapao;
+        ENDIF
+        TPErase;
+    ENDPROC
+ENDMODULE
